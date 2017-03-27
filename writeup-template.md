@@ -80,11 +80,41 @@ As a last step, I normalized the image data because ...
 
 The code for splitting the data into training and validation sets is contained in the fifth code cell of the IPython notebook.  
 
-To cross validate my model, I randomly split the training data into a training set and validation set. I did this by ...
+To cross validate my model, I randomly split the training data into a training set and validation set. I did this by first shuffling the training data set and splitting them by using 
 
-My final training set had X number of images. My validation set and test set had Y and Z number of images.
+```
 
-The sixth code cell of the IPython notebook contains the code for augmenting the data set. I decided to generate additional data because ... To add more data to the the data set, I used the following techniques because ... 
+        from sklearn.model_selection import train_test_split
+        
+        # shuffleing data
+        X_train, y_train = shuffle(X_train, y_train)
+        
+        # For each epoch, there are separate training data and validation data
+        X_train_epoch, X_valid_epoch, y_train_epoch, y_valid_epoch\
+                                    = train_test_split(X_train, y_train,\
+                                                     stratify = y_train,\
+                                                     test_size=0.1,\
+                                                     random_state=23)
+```
+
+My final training set had 42042 number of images. My validation set and test set had 4672 and 12630 number of images.
+
+The sixth code cell of the IPython notebook contains the code for augmenting the data set. I decided to generate additional data because all class of traffic sign do not have sufficient data to train the model. To add more data to the the data set, I used the following techniques: 
+1. I calculated mean no of sample by performing ben count of each class
+
+```
+pics_per_class = np.bincount(y)
+mean_pics = int(np.mean(pics_per_class))
+```
+2. I generated extra picture of that class randomly if number of pictures is less the then mean number of sample. I determined how much extra picture are required by substracting no of present picture from mean number.
+
+```
+if pics_per_class[i] < mean_pics:
+      # Count how many additional pictures we want
+      new_wanted = mean_pics - pics_per_class[i]
+```
+3. Finally generated extra pictures were appended.
+
 
 Here is an example of an original image and an augmented image:
 
