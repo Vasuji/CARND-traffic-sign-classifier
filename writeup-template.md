@@ -113,12 +113,13 @@ if pics_per_class[i] < mean_pics:
       # Count how many additional pictures we want
       new_wanted = mean_pics - pics_per_class[i]
 ```
-3. Finally generated extra pictures were appended.
+
+3. Finally generated extra pictures were appended. The extra data generated was  equal to 11915.
 
 
-Here is an example of an original image and an augmented image:
+Here is a histogram representing distribution of all  training data (old+extra) in different classes:
 
-![alt text][image3]
+![alt text](extra_histo.png)
 
 The difference between the original data set and the augmented data set is the following ... 
 
