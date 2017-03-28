@@ -219,15 +219,8 @@ My final model results were:
 * validation set accuracy of ? 
 * test set accuracy of ?
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to over fitting or under fitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
-
-
 If a well known architecture was chosen:
+
 * What architecture was chosen?
 
 My network is a convolutional neural network, as these tend to do very well with images. I mostly used the same architecture as the LeNet neural network did, with 2 convolutional layers and 3 fully connected layers. I also did a few attempts with one less convolutional layer (which sped it up by a decent amount but dropped the accuracy) as well as one less fully connected layer (which only marginally dropped the accuracy).
@@ -307,3 +300,14 @@ For the first image, the model is relatively sure that this is a stop sign (prob
 
 
 For the second image ... 
+
+-----------------
+Extra Questions: (NA)
+If an iterative approach was chosen:
+* What was the first architecture that was tried and why was it chosen?
+* What were some problems with the initial architecture?
+* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to over fitting or under fitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
+* Which parameters were tuned? How were they adjusted and why?
+* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+
+
