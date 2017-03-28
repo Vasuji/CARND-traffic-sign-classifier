@@ -34,6 +34,10 @@ The goals / steps of this project are the following:
 ---
 ### Writeup / README
 
+
+
+
+
 #### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
 You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
@@ -56,7 +60,7 @@ signs data set:
 
 The code for this step is contained in the third code cell of the IPython notebook.  
 
-Here is an exploratory visualization of the data set. It is a subplot displaying few images from data and histogram showing no of sample in each classes.
+Here is an exploratory visualization of the data set. It is a subplot displaying few images from data and histogram showing no of sample in each classes before preprocessing.
 
 ![alt text](samples.png)
 
@@ -68,13 +72,18 @@ Here is an exploratory visualization of the data set. It is a subplot displaying
 
 The code for this step is contained in the fourth code cell of the IPython notebook.
 
-As a first step, I decided to convert the images to grayscale because ...
+As a first step, I decided to convert the images to grayscale because there is not significant information loss on going from GBG to grey. Rather this will speed up the training process by reducing the size of the data.
 
-Here is an example of a traffic sign image before and after grayscaling.
+Here is an example of a traffic sign image after grayscaling.
 
 ![alt text](after_preprocessing.png)
 
 As a last step, I normalized the image data because ...
+
+
+--------------
+
+
 
 #### 2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
@@ -126,6 +135,14 @@ The difference between the original data set and the augmented data set is the f
 2. Initial data was not preprocessed now we have preprocessed data.
 
 
+
+
+----------------
+
+
+
+
+
 #### 3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
 The code for my final model is located in the seventh cell of the ipython notebook. 
@@ -148,11 +165,44 @@ My final model consisted of the following layers:
  
 
 
+
+
+------------------
+
+
+
+
+
+
+
+
 #### 4. Describe how, and identify where in your code, you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
 The code for training the model is located in the eigth cell of the ipython notebook. 
 
 To train the model, I used an ....
+
+1. type of optimizer: AdamOptimizer
+
+```
+logits = LeNet(x)
+cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits, one_hot_y)
+loss_operation = tf.reduce_mean(cross_entropy)
+optimizer = tf.train.AdamOptimizer(learning_rate = rate)
+training_operation = optimizer.minimize(loss_operation)
+```
+
+2. the batch size: 128
+3. number of epochs :  50
+4. hyperparameters learning rate : 0.001
+
+
+I utilized the AdamOptimizer from within TensorFLow to optimize, which seemed to do better than a regular Gradient Descent Optimizer. Also, I tried a few different batch sizes (see below), but settled at 150 as that seemed to perform better than batch sizes larger or smaller than that. I ran only 10 epochs, primarily as a result of time and further performance gains, as it was already arriving at nearly 97-98% validation accuracy, and further epochs resulted in only marginal gains while continuing to increase time incurred in training. Additionally, there is no guarantee that further improvement in validation accuracy does anything other than just overfit the data (although adding dropout to the model does help in that regard).
+For the model hyperparameters, I stuck with a mean of 0 and standard deviation/sigma of 0.1. An important aspect of the model is trying to keep a mean of 0 and equal variance, so these hyperparameters attempt to follow this philosophy. I tried a few other standard deviations but found a smaller one did not really help, while a larger one vastly increased the training time necessary.
+
+
+-----------------
+
 
 ### 5. Describe the approach taken for finding a solution. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
@@ -170,11 +220,37 @@ If an iterative approach was chosen:
 * Which parameters were tuned? How were they adjusted and why?
 * What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
 
+
 If a well known architecture was chosen:
 * What architecture was chosen?
+
+My network is a convolutional neural network, as these tend to do very well with images. I mostly used the same architecture as the LeNet neural network did, with 2 convolutional layers and 3 fully connected layers. I also did a few attempts with one less convolutional layer (which sped it up by a decent amount but dropped the accuracy) as well as one less fully connected layer (which only marginally dropped the accuracy).
+
+
 * Why did you believe it would be relevant to the traffic sign application?
+
+One item I did change from the basic LeNet structure was adding dropout to the fully connected layers. Although this makes initial epochs in validation a little worse, I gained an additional 3% on test accuracy. Since I was getting to validation accuracy of around 97%, with test accuracy down by 88-89%, there was clearly a little bit of overfitting being done. Dropout helped get my test accuracy into the 90's by preventing some of that overfitting. I put dropout at 0.7 probability as that tended to still validate at a decent rate within an acceptable number of epochs over a lower number such as 0.5. Also, I switched max pool to average pool as that seemed to slightly increase accuracy.
+
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
  
+I ran through a few items for each paramater in order to tune my model further. The results of this are shown below; not that this is not a true grid search as I was only tuning one parameter at a time as opposed to checking every combination of the below items. For speed's sake, I stuck to 10 epochs, although there is definitely a potential had I ran through something like 100 epochs to improve the validation accuracy while at the same time arriving at a better final test score. The default otherwise used was a learning rate of .01, 150 batch size, 2 convolutional layers and 3 fully connected layers (which is after a little bit of guess and check already).
+Learning rate after 10 epochs:
+.1 = .040
+.01 = .976 .005 = .983 .001 = .973
+Batch size after 10 epochs:
+250 = .967
+150 = .976
+50 = .043
+Less layers after 10 epochs:
+2 convolutional, 3 fully connected = .976
+1 convolutional, 3 fully connected = .944
+2 convolutional, 2 fully connected = .979 (this came out slightly better than the 2 convolutional and 3 fully connected above, but given the similarity I preferred the slightly deeper model as there was almost no difference in speed. I chose this because I thought the additional layer that included dropout would help against overfitting).
+As the CNN with 2 convolutional layers, 3 fully connected, a learning rate of .005 and a batch size 150 appears to result in the optimal CNN, I utilized this for the final model.
+
+
+
+
+
 
 ### Test a Model on New Images
 
@@ -186,6 +262,9 @@ Here are five German traffic signs that I found on the web:
 ![alt text][image7] ![alt text][image8]
 
 The first image might be difficult to classify because ...
+
+
+-----------
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
@@ -203,6 +282,9 @@ Here are the results of the prediction:
 
 
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+
+
+-------------
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
