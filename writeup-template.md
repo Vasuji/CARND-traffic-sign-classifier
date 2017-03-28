@@ -241,7 +241,7 @@ Here are five German traffic signs that I found on the web:
 
 ![alt text](german.png) 
 
-The first image might be difficult to classify because ...
+The first image(stop) might not be difficult to classify because it looks lees confusing in comparesion to thers. The third image(road work) is little bit confusing with second (Yield) because the color intensity distibution is pretty much similar. The 4 th image (Left turn) should be easy but 5th image(60 KM) is kind of confusing because other traffic symbols also have such symbol like 30 KM.
 
 
 -----------
@@ -271,16 +271,9 @@ The model was able to correctly guess 3 of the 5 traffic signs, which gives an a
 
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
-For the first image, the 60 km/h sign, as I expected, it got the fact that it was a speed sign correct, but unfortunately thought it was the 80 km/h sign. Given the highest probability was only around 3%, the model definitely struggles distinguishing between speed signs (the top four probabilities are all speed signs).
+For the first image, Stop sign, as I expected, it got the fact that it was a speed sign correct, but unfortunately thought it was the 80 km/h sign. Given the highest probability was only around 3%, the model definitely struggles distinguishing between speed signs (the top four probabilities are all speed signs).
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .9         			| Stop sign   									| 
-| .20     			| Yield										|
-| .05				| Road Work										|
-| .04	      			| Turn Left					 				|
-| .01				| 60 KM      							|
-
+[a](result.png)
 
 
 For the second (left turn), it unfortunately guessed it as a "No Vehicles" sign first; however, the second highest probability is the correct answer of the Left Turn Ahead. I'm fairly intrigued by the model putting the No Vehicles sign here, as it actually lands in the top five for four of the five signs I looked at. It must mainly be focused on the sign being round for that one.
