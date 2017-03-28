@@ -40,13 +40,13 @@ The goals / steps of this project are the following:
 
 #### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
+You're reading it! and here is a link to my [project code](https://github.com/Vasuji/carnd-project2)
 
 ### Data Set Summary & Exploration
 
 #### 1. Provide a basic summary of the data set and identify where in your code the summary was done. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
 
-The code for this step is contained in the second code cell of the IPython notebook.  
+The code for this step is contained in the first and second code cell of the IPython notebook.  
 
 I used the pandas library to calculate summary statistics of the traffic
 signs data set:
@@ -58,7 +58,7 @@ signs data set:
 
 #### 2. Include an exploratory visualization of the dataset and identify where the code is in your code file.
 
-The code for this step is contained in the third code cell of the IPython notebook.  
+The code for this step is contained in the third and fourth code cell of the IPython notebook.  
 
 Here is an exploratory visualization of the data set. It is a subplot displaying few images from data and histogram showing no of sample in each classes before preprocessing.
 
@@ -70,15 +70,15 @@ Here is an exploratory visualization of the data set. It is a subplot displaying
 
 #### 1. Describe how, and identify where in your code, you preprocessed the image data. What tecniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc.
 
-The code for this step is contained in the fourth code cell of the IPython notebook.
+The code for this step is contained in the 5th and 6th code cell of the IPython notebook.
 
 As a first step, I decided to convert the images to grayscale because there is not significant information loss on going from GBG to grey. Rather this will speed up the training process by reducing the size of the data.
 
-Here is an example of a traffic sign image after grayscaling.
+Here is an example of a traffic sign image after grayscaling which is done at 7th code cell.
 
 ![alt text](after_preprocessing.png)
 
-As a last step, I normalized the image data because ...
+As a last step, I normalized the image data because it is easy to processes data from input layer once these data are normalized.
 
 
 --------------
@@ -87,7 +87,7 @@ As a last step, I normalized the image data because ...
 
 #### 2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
-The code for splitting the data into training and validation sets is contained in the fifth code cell of the IPython notebook.  
+The code for splitting the data into training and validation sets is contained in the 13th code cell of the IPython notebook.  
 
 To cross validate my model, I randomly split the training data into a training set and validation set. I did this by first shuffling the training data set and splitting them by using 
 
@@ -109,13 +109,14 @@ To cross validate my model, I randomly split the training data into a training s
 My final training set had 42042 number of images. My validation set and test set had 4672 and 12630 number of images.
 
 The sixth code cell of the IPython notebook contains the code for augmenting the data set. I decided to generate additional data because all class of traffic sign do not have sufficient data to train the model. To add more data to the the data set, I used the following techniques: 
-1. I calculated mean no of sample by performing ben count of each class
+
+1. I calculated mean no of sample by performing bean count of each classes
 
 ```
 pics_per_class = np.bincount(y)
 mean_pics = int(np.mean(pics_per_class))
 ```
-2. I generated extra picture of that class randomly if number of pictures is less the then mean number of sample. I determined how much extra picture are required by substracting no of present picture from mean number.
+2. I generated extra picture of that class randomly if number of pictures is less the then mean number of sample. I determined how much extra picture are required by substracting no of present picture from mean number. This is done in 8th and 9th code cell.
 
 ```
 if pics_per_class[i] < mean_pics:
@@ -145,7 +146,7 @@ The difference between the original data set and the augmented data set is the f
 
 #### 3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
-The code for my final model is located in the seventh cell of the ipython notebook. 
+The code for my final model is located in the 14th cell of the ipython notebook. 
 
 My final model consisted of the following layers:
 
@@ -178,13 +179,13 @@ My final model consisted of the following layers:
 
 #### 4. Describe how, and identify where in your code, you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-The code for training the model is located in the eigth cell of the ipython notebook. 
+The code for training the model is located in the 18th cell of the ipython notebook. 
 
 To train the model, I used the following:
 
 1. type of optimizer: AdamOptimizer
 
-I utilized the AdamOptimizer from within TensorFLow to optimize, which seemed to do better than a regular Gradient Descent Optimizer.
+I utilized the AdamOptimizer from within TensorFLow to optimize, which seemed to do better than a regular Gradient Descent Optimizer. It is in 17th cell of the ipython notebook.
 
 ```
 logits = LeNet(x)
@@ -194,11 +195,11 @@ optimizer = tf.train.AdamOptimizer(learning_rate = rate)
 training_operation = optimizer.minimize(loss_operation)
 ```
 
-2. the batch size: 128
+2. the batch size: 160
 
-I tried a few different batch sizes (see below), but settled at 150 as that seemed to perform better than batch sizes larger or smaller than that.
+I tried a few different batch sizes (see below), but settled at 160 as that seemed to perform better than batch sizes larger or smaller than that.
 
-3. number of epochs :  50
+3. number of epochs :  20
 
 I ran only 10 epochs, primarily as a result of time and further performance gains, as it was already arriving at nearly 97-98% validation accuracy, and further epochs resulted in only marginal gains while continuing to increase time incurred in training. Additionally, there is no guarantee that further improvement in validation accuracy does anything other than just overfit the data (although adding dropout to the model does help in that regard).
  
