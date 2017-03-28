@@ -48,9 +48,9 @@ The code for this step is contained in the third and fourth code cell of the IPy
 
 Here is an exploratory visualization of the data set. It is a subplot displaying few images from data and histogram showing no of sample in each classes before preprocessing.
 
-![alt text](.\pics\samples.png)
+![alt text](https://github.com/Vasuji/carnd-project2/blob/master/pics/samples.png?raw=true)
 
-![histogram](.\pics\histogram.png)
+![histogram](https://github.com/Vasuji/carnd-project2/blob/master/pics/histogram.png?raw=true)
 
 ### Design and Test a Model Architecture
 
@@ -62,7 +62,7 @@ As a first step, I decided to convert the images to grayscale because there is n
 
 Here is an example of a traffic sign image after grayscaling which is done at 7th code cell.
 
-![alt text](after_preprocessing.png)
+![alt text](https://github.com/Vasuji/carnd-project2/blob/master/pics/after_preprocessing.png?raw=true)
 
 As a last step, I normalized the image data because it is easy to processes data from input layer once these data are normalized.
 
@@ -115,7 +115,7 @@ if pics_per_class[i] < mean_pics:
 
 Here is a histogram representing distribution of all  training data (old+extra) in different classes taken from 10th code cell:
 
-![alt text](extra_histo.png)
+![alt text](https://github.com/Vasuji/carnd-project2/blob/master/pics/extra_histo.png?raw=true)
 
 The difference between the original data set and the augmented data set is the following:
 1. Initially all data was not uniformly distributed in each classes.
@@ -222,7 +222,7 @@ I ran through a few items for each paramater in order to tune my model further. 
 
 Here are five German traffic signs that I found on the web:
 
-![alt text](german.png) 
+![alt text](https://github.com/Vasuji/carnd-project2/blob/master/pics/german.png?raw=true) 
 
 The first image(stop) might not be difficult to classify because it looks lees confusing in comparesion to thers. The third image(road work) is little bit confusing with second (Yield) because the color intensity distibution is pretty much similar. The 4 th image (Left turn) should be easy but 5th image(60 KM) is kind of confusing because other traffic symbols also have such symbol like 30 KM.
 
@@ -254,7 +254,7 @@ The model was able to correctly guess 3 of the 5 traffic signs, which gives an a
 
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook. The result image is shown below.
 
-![a](result.png)
+![a](https://github.com/Vasuji/carnd-project2/blob/master/pics/result.png?raw=true)
 
 
 1. For the first image (Stop sign) got correctly classified as I expected with the heighest probability indicating it is Stop sign
