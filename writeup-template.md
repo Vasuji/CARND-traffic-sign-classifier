@@ -215,9 +215,9 @@ For the model hyperparameters, I stuck with a mean of 0 and standard deviation/s
 The code for calculating the accuracy of the model is located in the ninth cell of the Ipython notebook.
 
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+* training set accuracy of 98 %
+* validation set accuracy of 98%
+* test set accuracy of 90%
 
 If a well known architecture was chosen:
 
@@ -274,13 +274,13 @@ Here are the results of the prediction:
 |:---------------------:|:---------------------------------------------:| 
 | Stop Sign      		| Stop sign   									| 
 | Yield				| Yield											|
-| Road Work			| Yield											|
+| Road Work			| Speed Limit 30 KM 							|
 | Turn left     		| Turn left 										|
-| 60 km/h	      		| Bumpy Road					 				|
+| 60 km/h	      		| Yield					 				|
 
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 3 of the 5 traffic signs, which gives an accuracy of 60%. This compares favorably to the accuracy on the test set.
 
 
 -------------
@@ -289,26 +289,23 @@ The model was able to correctly guess 4 of the 5 traffic signs, which gives an a
 
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+For the first image, the 60 km/h sign, as I expected, it got the fact that it was a speed sign correct, but unfortunately thought it was the 80 km/h sign. Given the highest probability was only around 3%, the model definitely struggles distinguishing between speed signs (the top four probabilities are all speed signs).
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| .9         			| Stop sign   									| 
+| .20     			| Yield										|
+| .05				| Road Work										|
+| .04	      			| Turn Left					 				|
+| .01				| 60 KM      							|
 
 
-For the second image ... 
 
------------------
-Extra Questions: (NA)
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to over fitting or under fitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+For the second (left turn), it unfortunately guessed it as a "No Vehicles" sign first; however, the second highest probability is the correct answer of the Left Turn Ahead. I'm fairly intrigued by the model putting the No Vehicles sign here, as it actually lands in the top five for four of the five signs I looked at. It must mainly be focused on the sign being round for that one.
+
+For the third, it incorrectly guesses priority road. I believe this is due to the sign shape. Somewhat oddly, it never guesses the road work sign at all. This may be due to the limited number of epochs (10) I ran on the model - the complexity of the inner shape may be difficult for the model to learn in such a short time (if at all).
+It correctly guesses both the fourth and fifth images! It is much more confident on the yield sign than anything it thought on the others.
+
+So, my model only worked exactly on 40% of the additional pictures. However, it also correctly identified the 60 km/h sign as a speed sign, and was fairly close on the Left Turn Ahead sign, so with some tweaking of either the model or further preprocessing of the images, I bet I could get to at least 80% on these. This is of course still lower than the nearly 93% achieved on the test data, but still would be fairly good for not having curated the images exactly like whomever did so on the original dataset.
 
 
