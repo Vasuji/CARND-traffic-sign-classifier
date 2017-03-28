@@ -273,7 +273,7 @@ The code for making predictions on my final model is located in the 11th cell of
 
 For the first image, Stop sign, as I expected, it got the fact that it was a speed sign correct, but unfortunately thought it was the 80 km/h sign. Given the highest probability was only around 3%, the model definitely struggles distinguishing between speed signs (the top four probabilities are all speed signs).
 
-[a](result.png)
+![a](result.png)
 
 
 For the second (left turn), it unfortunately guessed it as a "No Vehicles" sign first; however, the second highest probability is the correct answer of the Left Turn Ahead. I'm fairly intrigued by the model putting the No Vehicles sign here, as it actually lands in the top five for four of the five signs I looked at. It must mainly be focused on the sign being round for that one.
