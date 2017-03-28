@@ -149,18 +149,8 @@ My final model consisted of the following layers:
 | Fully connected	|  Input = 120. Output = 84    		  |
 | Fully connected	|  Input = 84. Output = 43   		  |
 
- 
-
-
-
 
 ------------------
-
-
-
-
-
-
 
 
 #### 4. Describe how, and identify where in your code, you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
@@ -210,16 +200,17 @@ If a well known architecture was chosen:
 
 * What architecture was chosen?
 
-My network is a convolutional neural network, as these tend to do very well with images. I mostly used the same architecture as the LeNet neural network did, with 2 convolutional layers and 3 fully connected layers. I also did a few attempts with one less convolutional layer (which sped it up by a decent amount but dropped the accuracy) as well as one less fully connected layer (which only marginally dropped the accuracy).
+I used convolutional neural network, as these tend to do very well with images. I started with LeNet neural network and tried to play around this architecture. I used 2 convolutional layers and 3 fully connected layers. There is speed accuracy trade off. I also did a few attempts with one less convolutional layer which sped it up by a decent amount but dropped the accuracy. Further one less fully connected layer only marginally dropped the accuracy.
 
 
 * Why did you believe it would be relevant to the traffic sign application?
 
-One item I did change from the basic LeNet structure was adding dropout to the fully connected layers. Although this makes initial epochs in validation a little worse, I gained an additional 3% on test accuracy. Since I was getting to validation accuracy of around 97%, with test accuracy down by 88-89%, there was clearly a little bit of overfitting being done. Dropout helped get my test accuracy into the 90's by preventing some of that overfitting. I put dropout at 0.7 probability as that tended to still validate at a decent rate within an acceptable number of epochs over a lower number such as 0.5. Also, I switched max pool to average pool as that seemed to slightly increase accuracy.
+Starting with LeNet structure I added one extra dropout layer to the fully connected layers. Although this makes initial epochs in validation a little worse, I gained an additional 3% on test accuracy. Since I was getting to validation accuracy of around 97%, with test accuracy down by 88-89%, there was clearly a little bit of overfitting being done. Dropout helped get my test accuracy into the 90's by preventing some of that overfitting. I put dropout at 0.7 probability as that tended to still validate at a decent rate within an acceptable number of epochs over a lower number such as 0.5. Also, I switched max pool to average pool as that seemed to slightly increase accuracy.
 
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
  
 I ran through a few items for each paramater in order to tune my model further. The results of this are shown below; not that this is not a true grid search as I was only tuning one parameter at a time as opposed to checking every combination of the below items. For speed's sake, I stuck to 10 epochs, although there is definitely a potential had I ran through something like 100 epochs to improve the validation accuracy while at the same time arriving at a better final test score. The default otherwise used was a learning rate of .01, 150 batch size, 2 convolutional layers and 3 fully connected layers (which is after a little bit of guess and check already).
+
 Learning rate after 10 epochs:
 .1 = .040
 .01 = .976 .005 = .983 .001 = .973
@@ -227,11 +218,15 @@ Batch size after 10 epochs:
 250 = .967
 150 = .976
 50 = .043
+
 Less layers after 10 epochs:
 2 convolutional, 3 fully connected = .976
 1 convolutional, 3 fully connected = .944
-2 convolutional, 2 fully connected = .979 (this came out slightly better than the 2 convolutional and 3 fully connected above, but given the similarity I preferred the slightly deeper model as there was almost no difference in speed. I chose this because I thought the additional layer that included dropout would help against overfitting).
-As the CNN with 2 convolutional layers, 3 fully connected, a learning rate of .005 and a batch size 150 appears to result in the optimal CNN, I utilized this for the final model.
+2 convolutional, 2 fully connected = .979
+
+(this came out slightly better than the 2 convolutional and 3 fully connected above, but given the similarity I preferred the slightly deeper model as there was almost no difference in speed. I chose this because I thought the additional layer that included dropout would help against overfitting).
+
+As the CNN with 2 convolutional layers, 3 fully connected, a learning rate of .001 and a batch size 160 appears to result in the optimal CNN, I utilized this for the final model.
 
 
 
