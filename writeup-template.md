@@ -48,9 +48,9 @@ The code for this step is contained in the third and fourth code cell of the IPy
 
 Here is an exploratory visualization of the data set. It is a subplot displaying few images from data and histogram showing no of sample in each classes before preprocessing.
 
-![alt text](pics\samples.png)
+![alt text](.\pics\samples.png)
 
-![histogram](pics\histogram.png)
+![histogram](.\pics\histogram.png)
 
 ### Design and Test a Model Architecture
 
