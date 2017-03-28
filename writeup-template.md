@@ -205,15 +205,15 @@ I used convolutional neural network, as these tend to do very well with images. 
 
 * Why did you believe it would be relevant to the traffic sign application?
 
-Starting with LeNet structure I added one extra dropout layer to the fully connected layers. Although this makes initial epochs in validation a little worse, I gained an additional 3% on test accuracy. Since I was getting to validation accuracy of around 97%, with test accuracy down by 88-89%, there was clearly a little bit of overfitting being done. Dropout helped get my test accuracy into the 90's by preventing some of that overfitting. I put dropout at 0.7 probability as that tended to still validate at a decent rate within an acceptable number of epochs over a lower number such as 0.5. Also, I switched max pool to average pool as that seemed to slightly increase accuracy.
+1. Starting with LeNet structure I added one extra dropout layer to the fully connected layers. Although this makes initial epochs in validation a little worse, I gained an additional progress on test accuracy.
+
+2. It was showing little bit of overfitting, since I was getting to validation accuracy of around 98%, with test accuracy down by 90-91%. Dropout helped me to get my test accuracy into the 91's by preventing some of that overfitting. I put dropout at 0.7 probability which appeared better then lower number such as 0.5. 
+
+3. Also, I switched max pool to average pool as that seemed to slightly increase accuracy.
 
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
  
-I ran through a few items for each paramater in order to tune my model further. The results of this are shown below; not that this is not a true grid search as I was only tuning one parameter at a time as opposed to checking every combination of the below items. For speed's sake, I stuck to 10 epochs, although there is definitely a potential had I ran through something like 100 epochs to improve the validation accuracy while at the same time arriving at a better final test score. The default otherwise used was a learning rate of .01, 150 batch size, 2 convolutional layers and 3 fully connected layers (which is after a little bit of guess and check already).
-
-this came out slightly better than the 2 convolutional and 3 fully connected above, but given the similarity I preferred the slightly deeper model as there was almost no difference in speed. I chose this because I thought the additional layer that included dropout would help against overfitting.
-
-As the CNN with 2 convolutional layers, 3 fully connected, a learning rate of .001 and a batch size 160 appears to result in the optimal CNN, I utilized this for the final model.
+I ran through a few items for each paramater in order to tune my model further. After trying few different values of batch sizes and hyper parameters, I tested them in test set. As the CNN with 2 convolutional layers, 3 fully connected, a learning rate of .001 and a batch size 160 appears to result in the optimal CNN, I utilized this for the final model.
 
 
 ### Test a Model on New Images
@@ -239,9 +239,9 @@ Here are the results of the prediction:
 |:---------------------:|:---------------------------------------------:| 
 | Stop Sign      		| Stop sign   									| 
 | Yield				| Yield											|
-| Road Work			| Speed Limit 30 KM 							|
+| Road Work			| General Caution							|
 | Turn left     		| Turn left 										|
-| 60 km/h	      		| Yield					 				|
+| 60 km/h	      		| 50 Km/h				 				|
 
 
 
