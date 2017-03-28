@@ -211,26 +211,9 @@ Starting with LeNet structure I added one extra dropout layer to the fully conne
  
 I ran through a few items for each paramater in order to tune my model further. The results of this are shown below; not that this is not a true grid search as I was only tuning one parameter at a time as opposed to checking every combination of the below items. For speed's sake, I stuck to 10 epochs, although there is definitely a potential had I ran through something like 100 epochs to improve the validation accuracy while at the same time arriving at a better final test score. The default otherwise used was a learning rate of .01, 150 batch size, 2 convolutional layers and 3 fully connected layers (which is after a little bit of guess and check already).
 
-Learning rate after 10 epochs:
-.1 = .040
-.01 = .976 .005 = .983 .001 = .973
-Batch size after 10 epochs:
-250 = .967
-150 = .976
-50 = .043
-
-Less layers after 10 epochs:
-2 convolutional, 3 fully connected = .976
-1 convolutional, 3 fully connected = .944
-2 convolutional, 2 fully connected = .979
-
-(this came out slightly better than the 2 convolutional and 3 fully connected above, but given the similarity I preferred the slightly deeper model as there was almost no difference in speed. I chose this because I thought the additional layer that included dropout would help against overfitting).
+this came out slightly better than the 2 convolutional and 3 fully connected above, but given the similarity I preferred the slightly deeper model as there was almost no difference in speed. I chose this because I thought the additional layer that included dropout would help against overfitting.
 
 As the CNN with 2 convolutional layers, 3 fully connected, a learning rate of .001 and a batch size 160 appears to result in the optimal CNN, I utilized this for the final model.
-
-
-
-
 
 
 ### Test a Model on New Images
@@ -274,15 +257,15 @@ The code for making predictions on my final model is located in the 11th cell of
 ![a](result.png)
 
 
-1. For the first image, Stop sign, as I expected, it got the fact that it was a speed sign correct, but unfortunately thought it was the 80 km/h sign. Given the highest probability was only around 3%, the model definitely struggles distinguishing between speed signs (the top four probabilities are all speed signs).
+1. For the first image (Stop sign) got correctly classified as I expected with the heighest probability indicating it is Stop sign
 
-2. For the second (left turn), it unfortunately guessed it as a "No Vehicles" sign first; however, the second highest probability is the correct answer of the Left Turn Ahead. I'm fairly intrigued by the model putting the No Vehicles sign here, as it actually lands in the top five for four of the five signs I looked at. It must mainly be focused on the sign being round for that one.
+2. For the second (yield) got correctly classified as I expected again with the heighest probability indicating that it is Yield sign.
 
-3. For the third, it incorrectly guesses priority road. I believe this is due to the sign shape. Somewhat oddly, it never guesses the road work sign at all. This may be due to the limited number of epochs (10) I ran on the model - the complexity of the inner shape may be difficult for the model to learn in such a short time (if at all).
+3. For the third, it incorrectly guesses General caution and there is no probability for road construction. The model is totally confused with other. There are two parallel bars for priority road and Redundant mandatory which are almost probable after General caution. It looks like model has hard time to predit which one is this.
 
-4. It correctly guesses both the fourth and fifth images! It is much more confident on the yield sign than anything it thought on the others.
+4. It correctly guesses both the fourth and fifth is pretty much near! It is much more confident on the Turn left sign than anything it thought on the others. Speed limit 60 is predicted as speed limit 50. Which clearly shows that model could not distinguise digit 5 from 6.
 
 
-So, my model only worked exactly on 40% of the additional pictures. However, it also correctly identified the 60 km/h sign as a speed sign, and was fairly close on the Left Turn Ahead sign, so with some tweaking of either the model or further preprocessing of the images, I bet I could get to at least 80% on these. This is of course still lower than the nearly 93% achieved on the test data, but still would be fairly good for not having curated the images exactly like whomever did so on the original dataset.
+So, my model only worked exactly on 60% of the additional pictures. However, it is fairly close to the prediction of incorrectly predicted class.
 
 
