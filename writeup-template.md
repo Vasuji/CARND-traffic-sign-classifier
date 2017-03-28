@@ -17,25 +17,11 @@ The goals / steps of this project are the following:
 * Summarize the results with a written report
 
 
-[//]: # (Image References)
-
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
-
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
 ---
 ### Writeup / README
-
-
-
 
 
 #### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
@@ -89,7 +75,7 @@ As a last step, I normalized the image data because it is easy to processes data
 
 The code for splitting the data into training and validation sets is contained in the 13th code cell of the IPython notebook.  
 
-To cross validate my model, I randomly split the training data into a training set and validation set. I did this by first shuffling the training data set and splitting them by using 
+To cross validate my model, I randomly split the training data into a training set and validation set. I did this by first shuffling the training data set and splitting them by using sklearn ```train_test_split``` function in ```model selection```.
 
 ```
 
@@ -108,7 +94,7 @@ To cross validate my model, I randomly split the training data into a training s
 
 My final training set had 42042 number of images. My validation set and test set had 4672 and 12630 number of images.
 
-The sixth code cell of the IPython notebook contains the code for augmenting the data set. I decided to generate additional data because all class of traffic sign do not have sufficient data to train the model. To add more data to the the data set, I used the following techniques: 
+The 8th and 9th code cell of the IPython notebook contains the code for augmenting the data set. I decided to generate additional data because all class of traffic sign do not have sufficient data to train the model. To add more data to the the data set, I used the following techniques: 
 
 1. I calculated mean no of sample by performing bean count of each classes
 
@@ -116,7 +102,7 @@ The sixth code cell of the IPython notebook contains the code for augmenting the
 pics_per_class = np.bincount(y)
 mean_pics = int(np.mean(pics_per_class))
 ```
-2. I generated extra picture of that class randomly if number of pictures is less the then mean number of sample. I determined how much extra picture are required by substracting no of present picture from mean number. This is done in 8th and 9th code cell.
+2. I generated extra picture of that class randomly if number of pictures is less the then mean number of sample. I determined how much extra picture are required by substracting number of present picture from mean number. This is done in 8th and 9th code cell.
 
 ```
 if pics_per_class[i] < mean_pics:
@@ -127,7 +113,7 @@ if pics_per_class[i] < mean_pics:
 3. Finally generated extra pictures were appended. The extra data generated was  equal to 11915.
 
 
-Here is a histogram representing distribution of all  training data (old+extra) in different classes:
+Here is a histogram representing distribution of all  training data (old+extra) in different classes taken from 10th code cell:
 
 ![alt text](extra_histo.png)
 
@@ -183,9 +169,9 @@ The code for training the model is located in the 18th cell of the ipython noteb
 
 To train the model, I used the following:
 
-1. type of optimizer: AdamOptimizer
+1. Type of optimizer: AdamOptimizer
 
-I utilized the AdamOptimizer from within TensorFLow to optimize, which seemed to do better than a regular Gradient Descent Optimizer. It is in 17th cell of the ipython notebook.
+I utilized the AdamOptimizer from within TensorFLow to optimize because it seemed to do better than a regular Gradient Descent Optimizer. It is in 17th cell of the ipython notebook.
 
 ```
 logits = LeNet(x)
@@ -197,15 +183,15 @@ training_operation = optimizer.minimize(loss_operation)
 
 2. the batch size: 160
 
-I tried a few different batch sizes (see below), but settled at 160 as that seemed to perform better than batch sizes larger or smaller than that.
+I tried a few different batch sizes and finally found 160 to perform better than batch sizes larger or smaller than that.
 
 3. number of epochs :  20
 
-I ran only 10 epochs, primarily as a result of time and further performance gains, as it was already arriving at nearly 97-98% validation accuracy, and further epochs resulted in only marginal gains while continuing to increase time incurred in training. Additionally, there is no guarantee that further improvement in validation accuracy does anything other than just overfit the data (although adding dropout to the model does help in that regard).
+I ran only 20 epochs. The time and performance gains are two major factors to be considered during training. For performance gains, it was already arriving at nearly 97-98% validation accuracy. Adding further epochs resulted in only marginal gains but this increased time incurred in training. There is potential risk of overfitting the data on further improvement in validation accuracy.
  
 4. hyperparameters : learning rate = 0.001, mean = 0.0 sigma = 0.1
 
-For the model hyperparameters, I stuck with a mean of 0 and standard deviation/sigma of 0.1. An important aspect of the model is trying to keep a mean of 0 and equal variance, so these hyperparameters attempt to follow this philosophy. I tried a few other standard deviations but found a smaller one did not really help, while a larger one vastly increased the training time necessary.
+For the model hyperparameters, I took learning rate of 0.001, mean of 0 and standard deviation/sigma of 0.1 so that I could avoid the local maxima during optimization and other noise. On doing this, the model is directed to keep a mean of 0 and equal variance, so these hyperparameters attempt to follow this line. Other value of mean and standard deviation took me away from performance gains perspective and computation time.
 
 
 -----------------
