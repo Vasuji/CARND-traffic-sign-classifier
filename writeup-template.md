@@ -180,9 +180,11 @@ My final model consisted of the following layers:
 
 The code for training the model is located in the eigth cell of the ipython notebook. 
 
-To train the model, I used an ....
+To train the model, I used the following:
 
 1. type of optimizer: AdamOptimizer
+
+I utilized the AdamOptimizer from within TensorFLow to optimize, which seemed to do better than a regular Gradient Descent Optimizer.
 
 ```
 logits = LeNet(x)
@@ -193,11 +195,15 @@ training_operation = optimizer.minimize(loss_operation)
 ```
 
 2. the batch size: 128
+
+I tried a few different batch sizes (see below), but settled at 150 as that seemed to perform better than batch sizes larger or smaller than that.
+
 3. number of epochs :  50
-4. hyperparameters learning rate : 0.001
 
+I ran only 10 epochs, primarily as a result of time and further performance gains, as it was already arriving at nearly 97-98% validation accuracy, and further epochs resulted in only marginal gains while continuing to increase time incurred in training. Additionally, there is no guarantee that further improvement in validation accuracy does anything other than just overfit the data (although adding dropout to the model does help in that regard).
+ 
+4. hyperparameters : learning rate = 0.001, mean = 0.0 sigma = 0.1
 
-I utilized the AdamOptimizer from within TensorFLow to optimize, which seemed to do better than a regular Gradient Descent Optimizer. Also, I tried a few different batch sizes (see below), but settled at 150 as that seemed to perform better than batch sizes larger or smaller than that. I ran only 10 epochs, primarily as a result of time and further performance gains, as it was already arriving at nearly 97-98% validation accuracy, and further epochs resulted in only marginal gains while continuing to increase time incurred in training. Additionally, there is no guarantee that further improvement in validation accuracy does anything other than just overfit the data (although adding dropout to the model does help in that regard).
 For the model hyperparameters, I stuck with a mean of 0 and standard deviation/sigma of 0.1. An important aspect of the model is trying to keep a mean of 0 and equal variance, so these hyperparameters attempt to follow this philosophy. I tried a few other standard deviations but found a smaller one did not really help, while a larger one vastly increased the training time necessary.
 
 
@@ -258,8 +264,7 @@ As the CNN with 2 convolutional layers, 3 fully connected, a learning rate of .0
 
 Here are five German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![alt text](german.png) 
 
 The first image might be difficult to classify because ...
 
