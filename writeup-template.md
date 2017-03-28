@@ -198,12 +198,12 @@ My final model results were:
 
 If a well known architecture was chosen:
 
-* What architecture was chosen?
+##### What architecture was chosen?
 
 I used convolutional neural network, as these tend to do very well with images. I started with LeNet neural network and tried to play around this architecture. I used 2 convolutional layers and 3 fully connected layers. There is speed accuracy trade off. I also did a few attempts with one less convolutional layer which sped it up by a decent amount but dropped the accuracy. Further one less fully connected layer only marginally dropped the accuracy.
 
 
-* Why did you believe it would be relevant to the traffic sign application?
+##### Why did you believe it would be relevant to the traffic sign application?
 
 1. Starting with LeNet structure I added one extra dropout layer to the fully connected layers. Although this makes initial epochs in validation a little worse, I gained an additional progress on test accuracy.
 
@@ -211,7 +211,7 @@ I used convolutional neural network, as these tend to do very well with images. 
 
 3. Also, I switched max pool to average pool as that seemed to slightly increase accuracy.
 
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
+##### How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
  
 I ran through a few items for each paramater in order to tune my model further. After trying few different values of batch sizes and hyper parameters, I tested them in test set. As the CNN with 2 convolutional layers, 3 fully connected, a learning rate of .001 and a batch size 160 appears to result in the optimal CNN, I utilized this for the final model.
 
